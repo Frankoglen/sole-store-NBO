@@ -18,7 +18,15 @@ function doGet(e) {
       var row = data[i];
       var product = {};
       for (var j = 0; j < headers.length; j++) {
-        product[headers[j]] = row[j];
+        var key = headers[j];
+        var val = row[j];
+  
+        // 💡 Automatic Google Drive Image Link Conversion
+        if (key === 'Image') {
+           val = toDirectDriveLink(val);
+        }
+  
+        product[key] = val;
       }
       products.push(product);
     }
@@ -88,4 +96,17 @@ function sendEmailNotification(orderId, orderData) {
   } catch (e) {
     // Graceful fail so the order sheet still processes
   }
+}
+
+// 💡 Helper function to convert Google Drive "view" links to direct image links
+function toDirectDriveLink(url) {
+  if (!url || typeof url !== 'string') return url;
+  if (!url.includes('drive.google.com')) return url;
+  
+  // Extract ID using regex (handles /d/ID/view, /file/d/ID, and ?id=ID)
+  var match = url.match(/\/d\/(.+?)(\/|$|\?)/) || url.match(/id=(.+?)(&|$)/);
+  if (match && match[1]) {
+    return "https://lh3.googleusercontent.com/d/" + match[1];
+  }
+  return url;
 }
