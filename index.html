@@ -193,6 +193,20 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
 .social-link:hover { background: var(--primary-fixed); color: var(--on-primary-fixed); transform: translateY(-5px); }
 .footer-meta { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2rem; color: var(--on-surface-variant); opacity: 0.6; }
 
+/* Trending Section */
+.trending-section { padding: 4rem 0; background: var(--surface); border-bottom: 1px solid var(--surface-container-highest); }
+.trending-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2rem; padding: 0 2rem; }
+.trending-scroll { display: flex; gap: 1.5rem; overflow-x: auto; padding: 0 2rem 2rem; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
+.trending-scroll::-webkit-scrollbar { display: none; }
+.trending-card { flex-shrink: 0; width: 85%; scroll-snap-align: center; cursor: pointer; transition: transform var(--transition); border: 1px solid var(--surface-container-highest); }
+.trending-card:hover { transform: translateY(-5px); border-color: var(--primary-fixed); }
+
+@media (min-width: 768px) {
+  .trending-card { width: calc(33.333% - 1.5rem); scroll-snap-align: start; }
+  .trending-header { padding: 0 calc((100% - 64rem) / 2 + 2rem); }
+  .trending-scroll { padding: 0 calc((100% - 64rem) / 2 + 2rem) 2rem; }
+}
+
 .hidden { display: none !important; }
 </style>
 </head>
@@ -221,6 +235,20 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
       <p class="hero-subtitle">Premium Selection Only</p>
       <h1 class="hero-title">Step Into<br>The Exclusive</h1>
       <a href="#catalog-grid" class="hero-btn" id="btn-hero-shop">Browse Collection</a>
+    </div>
+  </section>
+  
+  <!-- TRENDING SECTION -->
+  <section class="trending-section">
+    <div class="trending-header">
+      <h2 class="font-headline font-extrabold text-2xl uppercase tracking-widest text-primary">Trending Now</h2>
+      <span class="text-xs font-bold uppercase tracking-widest text-variant">Swipe to explore &rarr;</span>
+    </div>
+    <div id="trending-scroll" class="trending-scroll">
+      <!-- Trending items injected by JS -->
+      <div id="trending-fallback" style="display: contents;">
+        <p class="text-variant text-sm font-bold uppercase tracking-widest" style="padding: 2rem;">Loading latest drops...</p>
+      </div>
     </div>
   </section>
 
@@ -661,6 +689,38 @@ document.addEventListener('DOMContentLoaded', () => {
             attachClick(card);
             gridContainer.appendChild(card);
           });
+          
+          // 💡 Populate Trending Section (First 5 Products)
+          const trendingScroll = document.getElementById('trending-scroll');
+          if (resData.data.length > 0) {
+            trendingScroll.innerHTML = '';
+            resData.data.slice(0, 5).forEach((product, idx) => {
+              const card = document.createElement('div');
+              card.className = 'surface-card trending-card flex';
+              card.style = 'flex-direction: column; padding: 0;';
+              card.dataset.id = product.ID || `t-${idx}`;
+              card.dataset.name = product.Name;
+              card.dataset.price = product.Price;
+              card.dataset.tag = product.Tag;
+              card.dataset.img = product.Image;
+              card.dataset.desc = product.Description;
+
+              card.innerHTML = `
+                <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
+                  <img class="w-full h-full object-cover" src="${product.Image.split(',')[0].trim()}" alt="${product.Name}">
+                </div>
+                <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                  <div>
+                    <div class="text-xs uppercase tracking-widest font-bold text-primary mb-1">${product.Tag}</div>
+                    <h2 class="font-headline font-bold text-lg mb-1">${product.Name}</h2>
+                    <div class="font-headline font-bold text-lg text-variant">KES ${parseInt(product.Price).toLocaleString()}</div>
+                  </div>
+                </div>
+              `;
+              attachClick(card);
+              trendingScroll.appendChild(card);
+            });
+          }
         }
       } catch (err) {
         gridContainer.innerHTML = '<p class="text-variant text-center" style="grid-column: 1/-1; padding-top: 2rem; color: var(--error);">Error connecting to Google Sheets. Verify APPS_SCRIPT_URL.</p>';
@@ -668,6 +728,16 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       // Use standard existing mock DOM
       catalogItems.forEach(card => attachClick(card));
+      
+      // 💡 Populate Trending Fallback (First 3 static items)
+      const trendingScroll = document.getElementById('trending-scroll');
+      trendingScroll.innerHTML = '';
+      [...catalogItems].slice(0, 3).forEach(item => {
+        const card = item.cloneNode(true);
+        card.className = 'surface-card trending-card flex';
+        attachClick(card);
+        trendingScroll.appendChild(card);
+      });
     }
   }
   
