@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SOLE | Air Force 1 Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --surface: #131313;
+  --surface-container-lowest: #0e0e0e;
+  --surface-container-low: #1c1b1b;
+  --surface-container: #201f1f;
+  --surface-container-high: #2a2a2a;
+  --surface-container-highest: #353534;
+  --primary-fixed: #e3eb45;
+  --primary-fixed-dim: #c7cf28;
+  --on-primary-fixed: #1c1d00;
+  --on-surface: #e5e2e1;
+  --on-surface-variant: #c9c8ae;
+  --error: #ffb4ab;
+  --font-headline: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --transition: 0.3s ease;
+}
+
+.catalog-item { border: 2px solid transparent; }
+.catalog-item:hover { transform: translateY(-4px); border-color: var(--primary-fixed); box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+.catalog-item:hover img.catalog-img { transform: scale(1.05); }
+.mt-2 { margin-top: 0.5rem; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, p, ul, li { margin: 0; padding: 0; }
+body {
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+button, input, select, textarea { font: inherit; background: none; border: none; }
+button { cursor: pointer; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.material-symbols-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; font-family: 'Material Symbols Outlined'; }
+
+/* Layout Utilities */
+.container { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem; }
+.flex { display: flex; }
+.grid { display: grid; }
+.text-center { text-align: center; }
+
+/* Header & Nav */
+.header { position: relative; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; background-color: var(--surface); z-index: 50; border-bottom: none; }
+.header-logo { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.05em; color: var(--primary-fixed); font-family: var(--font-headline); }
+.header-nav { display: none; gap: 2rem; }
+.header-nav a { border-bottom: 2px solid var(--primary-fixed); padding-bottom: 0.25rem; font-weight: 500; }
+.header-actions { display: flex; gap: 1.5rem; color: var(--on-surface); }
+.header-actions button { color: inherit; transition: color var(--transition); }
+.header-actions button:hover { color: var(--primary-fixed); }
+.header-actions button:active { transform: scale(0.95); }
+
+@media (min-width: 768px) {
+  .header-nav { display: flex; }
+  .mobile-nav { display: none !important; }
+}
+
+.mobile-nav { position: fixed; bottom: 0; left: 0; width: 100%; display: flex; justify-content: space-around; padding: 0.5rem 1rem; background-color: var(--surface); border-top: 1px solid var(--surface-container); z-index: 50; }
+.mobile-nav a { display: flex; flex-direction: column; align-items: center; color: var(--on-surface); padding: 0.5rem; transition: background var(--transition); font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+.mobile-nav a.active { color: var(--primary-fixed); background-color: var(--surface-container); }
+.mobile-nav a:hover:not(.active) { background-color: var(--surface-container-low); }
+.mobile-nav .material-symbols-outlined { margin-bottom: 0.25rem; }
+
+/* Typography */
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+.text-5xl { font-size: 3rem; }
+.text-7xl { font-size: 4.5rem; }
+.font-headline { font-family: var(--font-headline); }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; }
+.uppercase { text-transform: uppercase; }
+.tracking-widest { letter-spacing: 0.1em; }
+.tracking-extrawide { letter-spacing: 0.2em; }
+.text-primary { color: var(--primary-fixed); }
+.text-variant { color: var(--on-surface-variant); }
+
+/* Pages & Transitions */
+main { padding-top: 7rem; padding-bottom: 8rem; }
+.page-screen { display: none; opacity: 0; transform: translateY(20px); transition: opacity var(--transition), transform var(--transition); }
+.page-screen.active { display: block; opacity: 1; transform: translateY(0); }
+.page-screen.fading-out { opacity: 0; transform: translateY(-20px); }
+
+/* Progress Bar */
+.progress-wrapper { display: flex; justify-content: center; margin-bottom: 3rem; position: relative; }
+.progress-line { position: absolute; height: 1px; width: 12rem; background-color: var(--surface-container-highest); top: 50%; transform: translateY(-50%); z-index: 0; left: 50%; margin-left: -6rem; }
+.progress-dots { display: flex; justify-content: space-between; width: 16rem; position: relative; z-index: 10; align-items: center; }
+.dot { width: 0.75rem; height: 0.75rem; background-color: var(--surface-container-highest); border-radius: 50%; outline: 1px solid var(--surface-container-highest); }
+.dot.active { background-color: var(--primary-fixed); outline: none; box-shadow: 0 0 0 4px rgba(227, 235, 69, 0.2); }
+.dot.filled { background-color: var(--primary-fixed); outline: none; }
+
+/* Buttons */
+.btn-primary { width: 100%; padding: 1.5rem; background-color: var(--primary-fixed); color: var(--on-primary-fixed); font-family: var(--font-headline); font-weight: 900; font-size: 1.25rem; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; transition: background var(--transition), transform 0.1s; }
+.btn-primary:active:not(:disabled) { transform: scale(0.98); }
+.btn-primary:hover:not(:disabled) { background-color: var(--primary-dim); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; background-color: var(--surface-container-high); color: var(--on-surface-variant); }
+
+/* Components */
+.surface-card { background-color: var(--surface-container); padding: 2rem; }
+.surface-low { background-color: var(--surface-container-low); padding: 1rem; }
+.aspect-square { aspect-ratio: 1 / 1; object-fit: cover; width: 100%; height: 100%; }
+
+/* Grid Layouts */
+.grid > *, .product-grid > *, .form-grid > * { min-width: 0; }
+.product-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+@media(min-width: 768px) {
+  .product-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+}
+@media(min-width: 1024px) {
+  .product-grid { grid-template-columns: 7fr 5fr; gap: 4rem; }
+}
+
+.thumb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+.thumb { background-color: var(--surface-container); border: 2px solid transparent; cursor: pointer; transition: border var(--transition); }
+.thumb:hover { background-color: var(--surface-container-high); }
+.thumb.active { border-color: var(--primary-fixed); }
+
+/* Size Selector */
+.size-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.size-btn { padding: 1rem 0; background-color: var(--surface-container-high); color: var(--on-surface); text-align: center; transition: background var(--transition), color var(--transition); }
+.size-btn:hover:not(:disabled) { background-color: var(--primary-fixed); color: var(--on-primary-fixed); }
+.size-btn.selected { background-color: var(--primary-fixed); color: var(--on-primary-fixed); }
+.size-btn:disabled { background-color: var(--surface-container-lowest); color: var(--on-surface-variant); cursor: not-allowed; position: relative; overflow: hidden; }
+.size-btn:disabled::after { content: ''; position: absolute; top: 50%; left: -10%; width: 120%; height: 1px; background-color: var(--error); transform: rotate(45deg); }
+
+/* Forms */
+.form-group { margin-bottom: 1.5rem; }
+.form-label { display: block; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--on-surface-variant); margin-bottom: 0.5rem; transition: color var(--transition); }
+.form-group:focus-within .form-label { color: var(--primary-fixed); }
+.form-input { width: 100%; background: var(--surface-container-lowest); border-bottom: 1px solid var(--surface-container-highest); color: var(--on-surface); padding: 1rem 0; font-family: var(--font-body); transition: border-color var(--transition); }
+.form-input::placeholder { color: var(--surface-container-highest); }
+.form-input:focus { outline: none; border-bottom-color: var(--primary-fixed); border-bottom-width: 2px; padding-bottom: calc(1rem - 1px); }
+.form-input.error { border-bottom-color: var(--error); }
+.form-select { appearance: none; cursor: pointer; }
+
+.form-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media(min-width: 768px) {
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  .form-group-full { grid-column: span 2; }
+}
+
+/* Animations */
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-check { animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+@keyframes slideDownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-down { animation: slideDownFade 0.4s ease forwards; }
+
+.hidden { display: none !important; }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">SOLE</div>
+  <nav class="header-nav">
+    <a href="#">Nairobi Kicks</a>
+  </nav>
+  <div class="header-actions">
+    <button aria-label="Cart"><span class="material-symbols-outlined">shopping_cart</span></button>
+    <button aria-label="Profile"><span class="material-symbols-outlined">person</span></button>
+  </div>
+</header>
+
+<!-- MAIN_CONTENT -->
+<div id="pages-container">
+
+<!-- PAGE CATALOG -->
+<div id="page-catalog" class="page-screen active container" style="max-width: 64rem;">
+  <div style="margin-bottom: 3rem; text-align: center;">
+    <h1 class="font-headline font-extrabold text-5xl uppercase tracking-widest text-primary">Catalog</h1>
+    <p class="text-variant text-lg mt-2 font-bold tracking-widest uppercase">Nairobi's Premium Sneaker Selection</p>
+  </div>
+  
+  <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+    <!-- Product 1 -->
+    <div class="surface-card catalog-item flex" style="flex-direction: column; padding: 0; cursor: pointer; transition: transform var(--transition);" data-id="1" data-name="Air Force 1 Premium" data-price="3500" data-tag="New Arrival" data-img="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80" data-desc="Clean, classic, and always in style. Made for the streets of Nairobi. Engineered with premium leather for maximum durability.">
+      <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
+        <img class="catalog-img w-full h-full object-cover" style="transition: transform 0.5s;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCww_hDxLgx1zR5O15eHgpA4V1hxFtc9TU6MX1764YsiAEkSfVyq096iuFs5WwcmcWUBY13MhibjTqdFq_-1UnioedfMF5bMlE1d2GXZ6Oo2ZerzvTrb4JL3YUQYLF-GhYSr4foHruxWSnx5XZVuL9gbF6_f80UxtTcFcF2JcaYbwCla3HiBbPpLvMk2gJNxPAn--LGi0kKVhkIZBsDyP1qFwu3Y3VMifbI72V5f2zEA6rlkoP_ou6eMRN4kGLetdkIKgqV7_9R9e0" alt="Air Force 1">
+      </div>
+      <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="text-xs uppercase tracking-widest font-bold text-primary mb-1">New Arrival</div>
+          <h2 class="font-headline font-bold text-xl mb-2">Air Force 1 Premium</h2>
+        </div>
+        <div class="font-headline font-bold text-xl text-variant mt-2">KES 3,500</div>
+      </div>
+    </div>
+    
+    <!-- Product 2 -->
+    <div class="surface-card catalog-item flex" style="flex-direction: column; padding: 0; cursor: pointer; transition: transform var(--transition);" data-id="2" data-name="Air Jordan 4 Retro" data-price="4500" data-tag="Bestseller" data-img="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&q=80" data-desc="Iconic silhouette with premium mixed materials. Maximum comfort and street credibility.">
+      <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
+        <img class="catalog-img w-full h-full object-cover" style="transition: transform 0.5s;" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&q=80" alt="AJ4">
+      </div>
+      <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="text-xs uppercase tracking-widest font-bold text-variant mb-1">Bestseller</div>
+          <h2 class="font-headline font-bold text-xl mb-2">Air Jordan 4 Retro</h2>
+        </div>
+        <div class="font-headline font-bold text-xl text-variant mt-2">KES 4,500</div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="surface-card catalog-item flex" style="flex-direction: column; padding: 0; cursor: pointer; transition: transform var(--transition);" data-id="3" data-name="Nike Dunk Low" data-price="3200" data-tag="Trending" data-img="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&q=80" data-desc="The ultimate daily driver. Two-tone color blocking and durable leather upper.">
+      <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
+        <img class="catalog-img w-full h-full object-cover" style="transition: transform 0.5s;" src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&q=80" alt="Dunk Low">
+      </div>
+      <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div class="text-xs uppercase tracking-widest font-bold text-variant mb-1">Trending</div>
+          <h2 class="font-headline font-bold text-xl mb-2">Nike Dunk Low</h2>
+        </div>
+        <div class="font-headline font-bold text-xl text-variant mt-2">KES 3,200</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE1 -->
+<div id="page-1" class="page-screen container">
+  <!-- Progress Indicator -->
+  <div class="flex" style="flex-direction: column; gap: 2.5rem; margin-bottom: 4rem;">
+    <button id="btn-page1-back" class="flex" style="align-items: center; gap: 0.5rem; color: var(--on-surface-variant); width: fit-content; padding: 0;">
+      <span class="material-symbols-outlined text-sm">arrow_back</span>
+      <span class="font-bold text-xs uppercase tracking-widest font-body">Back to Catalog</span>
+    </button>
+    <div class="progress-wrapper" style="margin-bottom: 0;">
+      <div class="progress-line"></div>
+      <div class="progress-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-grid">
+    <!-- Left Column: Hero Images -->
+    <div class="flex" style="flex-direction: column; gap: 1.5rem;">
+      <div class="aspect-square" style="background-color: var(--surface-container); overflow: hidden;">
+        <img id="product-img-main" alt="Product Main View" class="aspect-square" src=""/>
+      </div>
+      <div id="product-thumb-grid" class="thumb-grid hidden">
+      </div>
+    </div>
+
+    <!-- Right Column: Product Details -->
+    <div class="flex" style="flex-direction: column;">
+      <div id="product-tag" class="text-xs font-bold uppercase tracking-extrawide text-primary" style="margin-bottom: 0.5rem;">New Arrival</div>
+      <h1 id="product-title" class="text-5xl font-extrabold font-headline" style="line-height: 1; margin-bottom: 1.5rem;">Air Force 1 Premium</h1>
+      <p id="product-desc" class="text-variant text-lg" style="line-height: 1.5; margin-bottom: 2rem; max-width: 28rem;">Clean, classic, and always in style. Made for the streets of Nairobi. Engineered with premium leather for maximum durability.</p>
+      
+      <div class="text-4xl font-headline font-bold text-primary" style="margin-bottom: 3rem;" id="product-price">KES 3,500</div>
+
+      <!-- Size Selector -->
+      <div style="margin-bottom: 3rem;">
+        <div class="flex" style="justify-content: space-between; align-items: flex-end; margin-bottom: 1rem;">
+          <span class="text-sm font-bold uppercase tracking-widest text-on-surface">Select EU Size</span>
+          <span class="text-xs text-variant" style="text-decoration: underline; cursor: pointer;">Size Guide</span>
+        </div>
+        <div class="size-grid" id="size-selector">
+          <button class="size-btn" data-size="39">39</button>
+          <button class="size-btn" data-size="40">40</button>
+          <button class="size-btn" data-size="41">41</button>
+          <button class="size-btn" disabled>42</button>
+          <button class="size-btn" data-size="43">43</button>
+          <button class="size-btn" data-size="44">44</button>
+          <button class="size-btn" disabled>45</button>
+          <button class="size-btn" data-size="46">46</button>
+          <button class="size-btn" data-size="47">47</button>
+          <button class="size-btn" data-size="48">48</button>
+        </div>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 3rem;">
+        <div class="surface-low flex" style="align-items: center; gap: 0.75rem;">
+          <span class="material-symbols-outlined text-primary">payments</span>
+          <span class="text-sm font-bold">Pay on Delivery</span>
+        </div>
+        <div class="surface-low flex" style="align-items: center; gap: 0.75rem;">
+          <span class="material-symbols-outlined text-primary">local_shipping</span>
+          <span class="text-sm font-bold">Free Delivery Nairobi</span>
+        </div>
+      </div>
+
+      <!-- Details Grid -->
+      <div class="surface-card" style="margin-bottom: 3rem;">
+        <div class="flex" style="justify-content: space-between; border-bottom: 1px solid var(--surface-container-highest); padding-bottom: 1rem; margin-bottom: 1rem;">
+          <span class="text-variant">Payment Method</span>
+          <span class="font-bold">Cash / Mpesa</span>
+        </div>
+        <div class="flex" style="justify-content: space-between; border-bottom: 1px solid var(--surface-container-highest); padding-bottom: 1rem; margin-bottom: 1rem;">
+          <span class="text-variant">Delivery (Nairobi)</span>
+          <span class="font-bold text-primary">Free</span>
+        </div>
+        <div class="flex" style="justify-content: space-between; border-bottom: 1px solid var(--surface-container-highest); padding-bottom: 1rem; margin-bottom: 1rem;">
+          <span class="text-variant">Delivery (Outside)</span>
+          <span class="font-bold">KES 300 - 350</span>
+        </div>
+        <div class="flex" style="justify-content: space-between;">
+          <span class="text-variant">Condition</span>
+          <span class="font-bold">Brand New</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div style="margin-top: auto;">
+        <button id="btn-page1-next" class="btn-primary" disabled>Order Now</button>
+        <p class="text-center text-xs text-variant font-bold" style="margin-top: 1rem;">No payment needed here. We confirm by phone.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE2 -->
+<div id="page-2" class="page-screen container text-center" style="max-width: 64rem; text-align: left;">
+  <div class="flex" style="flex-direction: column; gap: 2.5rem; margin-bottom: 4rem;">
+    <button id="btn-page2-back" class="flex" style="align-items: center; gap: 0.5rem; color: var(--on-surface-variant); width: fit-content; padding: 0;">
+      <span class="material-symbols-outlined text-sm">arrow_back</span>
+      <span class="font-bold text-xs uppercase tracking-widest font-body">Return to Product</span>
+    </button>
+    <div class="progress-wrapper" style="margin-bottom: 0;">
+      <div class="progress-line" style="width: 100%;"></div>
+      <div class="progress-dots" style="width: 100%; max-width: 20rem; margin: 0 auto;">
+        <div class="dot filled"></div>
+        <div class="dot active"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="product-grid" style="align-items: flex-start;">
+    <!-- Form Side -->
+    <div>
+      <h3 class="font-headline font-bold text-2xl uppercase tracking-widest text-variant" style="margin-bottom: 2rem; text-align: left;">Checkout Details</h3>
+      
+      <form id="order-form" autocomplete="off" style="display: flex; flex-direction: column; gap: 2rem; text-align: left;">
+        <!-- Hidden field for Size -->
+        <input type="hidden" name="size" id="input-size" value="" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input class="form-input" id="input-name" name="name" placeholder="Enter your name" required type="text" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input class="form-input" id="input-phone" name="phone" placeholder="07XX XXX XXX" required type="tel" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Area / Location</label>
+            <input class="form-input" id="input-location" name="location" placeholder="Building, Street, Apartment" required type="text" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Delivery Zone</label>
+            <select class="form-input form-select" id="input-delivery" name="delivery_zone" required>
+              <option value="" disabled selected hidden>Select Delivery Zone</option>
+              <option value="nairobi">Within Nairobi - Free</option>
+              <option value="outside">Outside Nairobi - KES 300-350</option>
+            </select>
+          </div>
+          
+          <div id="outside-nairobi-info" class="surface-low hidden flex form-group-full" style="background-color: var(--surface-container-low); gap: 1rem; align-items: flex-start; border-left: 2px solid var(--primary-fixed); padding: 1.25rem;">
+            <span class="material-symbols-outlined text-primary">info</span>
+            <p class="text-sm text-variant" style="line-height: 1.6;">Mpesa payment collected before dispatch via PSV courier.</p>
+          </div>
+          
+          <div class="form-group form-group-full">
+            <label class="form-label">Optional Notes</label>
+            <textarea class="form-input" id="input-notes" name="notes" placeholder="Any specific instructions?" rows="2" style="resize: none;"></textarea>
+          </div>
+        </div>
+        
+        <div style="padding-top: 1rem;">
+          <button id="btn-submit" type="submit" class="btn-primary" style="margin-bottom: 1rem;">Confirm Order</button>
+          <div class="flex" style="align-items: center; justify-content: center; gap: 0.5rem; color: var(--on-surface-variant);">
+            <span class="material-symbols-outlined text-sm">verified_user</span>
+            <p class="text-xs uppercase tracking-widest font-bold">No payment on this page. You pay when we arrive.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Summary Side -->
+    <div>
+      <h3 class="font-headline font-bold text-lg uppercase tracking-widest text-variant" style="margin-bottom: 2rem; text-align: left;">Order Summary</h3>
+      <section class="surface-card flex" style="flex-direction: column; gap: 1.5rem; align-items: center; padding: 2.5rem; text-align: center;">
+        <div style="width: 12rem; height: 12rem; background-color: var(--surface-container-highest); flex-shrink: 0;">
+          <img id="summary-img" alt="Product Summary View" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80"/>
+        </div>
+        <div style="flex-grow: 1; width: 100%;">
+          <h2 id="summary-title" class="font-headline font-extrabold text-2xl" style="margin-bottom: 0.5rem;">Air Force 1 Premium</h2>
+          <div class="flex" style="justify-content: space-between; align-items: baseline; border-top: 1px solid var(--surface-container-highest); padding-top: 1.5rem; margin-top: 1rem;">
+            <p class="text-variant text-sm uppercase tracking-widest font-bold">Size: <span id="summary-size">42</span> EU</p>
+            <p id="summary-price" class="font-headline font-bold text-primary text-xl">KES 3,500</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE3 -->
+<div id="page-3" class="page-screen container" style="max-width: 56rem;">
+  <div class="progress-wrapper">
+    <div class="progress-line"></div>
+    <div class="progress-dots">
+      <div class="dot filled"></div>
+      <div class="dot filled"></div>
+      <div class="dot active"></div>
+    </div>
+  </div>
+
+  <div class="text-center" style="margin-bottom: 5rem;">
+    <div style="margin-bottom: 1.5rem; display: inline-flex; justify-content: center; align-items: center;">
+      <span id="success-icon" class="material-symbols-fill text-primary text-7xl" style="font-size: 6rem; transform: scale(0); opacity: 0;">check_circle</span>
+    </div>
+    <h1 class="font-headline font-bold text-5xl" style="margin-bottom: 1rem; letter-spacing: -0.05em;">Order Placed!</h1>
+    <p class="text-variant text-lg uppercase font-bold tracking-widest">Order Reference: #NBO-<span id="ref-num">88291</span></p>
+  </div>
+
+  <div class="grid product-grid" style="gap: 1.5rem;">
+    <!-- Order Summary Card -->
+    <section class="surface-card" style="border-left: 4px solid var(--primary-fixed); padding: 2rem;">
+      <h2 class="font-headline text-2xl font-bold uppercase tracking-widest text-primary" style="margin-bottom: 2rem;">Order Summary</h2>
+      
+      <div class="flex" style="flex-direction: column; gap: 1.5rem;">
+        <div class="flex" style="justify-content: space-between; align-items: flex-end; padding-bottom: 0.5rem; border-bottom: 1px solid var(--surface-container-highest);">
+          <span class="text-variant text-sm font-bold uppercase">Customer</span>
+          <span class="font-headline text-xl font-bold" id="conf-name">Kivuva Mwenda</span>
+        </div>
+        <div class="flex" style="justify-content: space-between; align-items: flex-end; padding-bottom: 0.5rem; border-bottom: 1px solid var(--surface-container-highest);">
+          <span class="text-variant text-sm font-bold uppercase">Phone</span>
+          <span class="font-headline text-xl font-bold" id="conf-phone">+254 712 345 678</span>
+        </div>
+        <div class="flex" style="justify-content: space-between; align-items: flex-end; padding-bottom: 0.5rem; border-bottom: 1px solid var(--surface-container-highest);">
+          <span class="text-variant text-sm font-bold uppercase">Product / Size</span>
+          <span class="font-headline text-xl font-bold"><span id="conf-title">AF1 Premium</span> / <span id="conf-size">42</span></span>
+        </div>
+        <div class="flex" style="justify-content: space-between; align-items: flex-end; padding-bottom: 0.5rem; border-bottom: 1px solid var(--surface-container-highest);">
+          <span class="text-variant text-sm font-bold uppercase">Location</span>
+          <span class="font-headline text-xl font-bold" id="conf-location">Westlands, Nairobi</span>
+        </div>
+        <div class="flex" style="justify-content: space-between; align-items: flex-end; padding-bottom: 0.5rem; border-bottom: 1px solid var(--surface-container-highest);">
+          <span class="text-variant text-sm font-bold uppercase">Delivery Zone</span>
+          <span class="font-headline text-xl font-bold text-right" id="conf-delivery" style="max-width: 60%; word-break: break-word;">Zone A (Priority)</span>
+        </div>
+        <div class="flex" style="justify-content: space-between; align-items: flex-end; padding-top: 1rem;">
+          <span class="text-primary text-sm font-black uppercase tracking-widest">Total Amount</span>
+          <span class="font-headline text-4xl font-black text-primary" id="conf-total">KES 3,500</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Happens Next -->
+    <section class="flex" style="flex-direction: column; gap: 1.5rem;">
+      <div class="surface-low" style="padding: 2rem; height: 100%;">
+        <h2 class="font-headline text-2xl font-bold uppercase tracking-widest" style="margin-bottom: 2rem;">What happens next</h2>
+        <ul style="display: flex; flex-direction: column; gap: 2rem;">
+          <li class="flex" style="gap: 1rem;">
+            <span class="font-headline text-3xl font-black text-primary" style="line-height: 1;">01</span>
+            <div>
+              <p class="font-bold" style="margin-bottom: 0.25rem;">Confirmation Reachout</p>
+              <p class="text-variant text-sm">We call or WhatsApp you within 15 minutes to confirm the details.</p>
+            </div>
+          </li>
+          <li class="flex" style="gap: 1rem;">
+            <span class="font-headline text-3xl font-black text-primary" style="line-height: 1;">02</span>
+            <div>
+              <p class="font-bold" style="margin-bottom: 0.25rem;">Logistics Sync</p>
+              <p class="text-variant text-sm">We agree on the precise delivery time and the most convenient meeting point.</p>
+            </div>
+          </li>
+          <li class="flex" style="gap: 1rem;">
+            <span class="font-headline text-3xl font-black text-primary" style="line-height: 1;">03</span>
+            <div>
+              <p class="font-bold" style="margin-bottom: 0.25rem;">Secure Payment</p>
+              <p class="text-variant text-sm">Inspection first. You pay via Cash or M-Pesa only after receiving your kicks.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div style="margin-top: 4rem;">
+    <button id="btn-reset" class="btn-primary" style="letter-spacing: 0.2em;">Browse More Shoes</button>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<nav class="mobile-nav">
+  <a href="#" class="active">
+    <span class="material-symbols-outlined">grid_view</span>
+    Shop
+  </a>
+  <a href="#">
+    <span class="material-symbols-outlined">search</span>
+    Search
+  </a>
+  <a href="#">
+    <span class="material-symbols-outlined" style="color: var(--primary-fixed);">local_mall</span>
+    <span style="color: var(--primary-fixed);">Orders</span>
+  </a>
+  <a href="#">
+    <span class="material-symbols-outlined">person</span>
+    Profile
+  </a>
+</nav>
+
+<!-- SCRIPT -->
+<script>
+// ============================================
+// Google Sheets Apps Script API URL 
+// Paste your URL here after deploying backend.gs
+// If left empty, the site functions securely offline via standard Data.
+// ============================================
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyePawskpwKCTs4YnVz-75FOdYdTpa7zD43d423ReYOFx07-cLGkCyzxAhmKBDVOBrfkw/exec'; 
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Elements
+  const p1NextBtn = document.getElementById('btn-page1-next');
+  const sizeSelectorBtns = document.querySelectorAll('.size-btn:not([disabled])');
+  const catalogItems = document.querySelectorAll('.catalog-item');
+  
+  const pageCatalog = document.getElementById('page-catalog');
+  const page1 = document.getElementById('page-1');
+  const page2 = document.getElementById('page-2');
+  const page3 = document.getElementById('page-3');
+  
+  const btnPage1Back = document.getElementById('btn-page1-back');
+  const btnPage2Back = document.getElementById('btn-page2-back');
+  
+  const orderForm = document.getElementById('order-form');
+  const inputSize = document.getElementById('input-size');
+  const summarySize = document.getElementById('summary-size');
+  
+  const inputDelivery = document.getElementById('input-delivery');
+  const outsideInfo = document.getElementById('outside-nairobi-info');
+  
+  // State
+  let selectedSize = null;
+  let selectedProduct = { name: '', price: 0, tag: '', img: '', desc: '' };
+  
+  // Dynamic Catalog Loader
+  async function loadCatalog() {
+    const gridContainer = document.querySelector('#page-catalog .grid');
+    
+    if (APPS_SCRIPT_URL) {
+      gridContainer.innerHTML = '<p class="text-variant text-center font-bold tracking-widest text-lg" style="grid-column: 1/-1; padding-top: 2rem;">Connecting to Google Sheets...</p>';
+      try {
+        const response = await fetch(APPS_SCRIPT_URL);
+        const resData = await response.json();
+        
+        if (resData.status === 'success' && resData.data.length > 0) {
+          gridContainer.innerHTML = '';
+          resData.data.forEach((product, idx) => {
+            const card = document.createElement('div');
+            card.className = 'surface-card catalog-item flex';
+            card.style = 'flex-direction: column; padding: 0; cursor: pointer; transition: transform var(--transition);';
+            card.dataset.id = product.ID || idx;
+            card.dataset.name = product.Name;
+            card.dataset.price = product.Price;
+            card.dataset.tag = product.Tag;
+            card.dataset.img = product.Image;
+            card.dataset.desc = product.Description;
+            
+            card.innerHTML = `
+              <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
+                <img class="catalog-img w-full h-full object-cover" style="transition: transform 0.5s;" src="${product.Image}" alt="${product.Name}">
+              </div>
+              <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div class="text-xs uppercase tracking-widest font-bold text-primary mb-1">${product.Tag}</div>
+                  <h2 class="font-headline font-bold text-xl mb-2">${product.Name}</h2>
+                </div>
+                <div class="font-headline font-bold text-xl text-variant mt-2">KES ${parseInt(product.Price).toLocaleString()}</div>
+              </div>
+            `;
+            attachClick(card);
+            gridContainer.appendChild(card);
+          });
+        }
+      } catch (err) {
+        gridContainer.innerHTML = '<p class="text-variant text-center" style="grid-column: 1/-1; padding-top: 2rem; color: var(--error);">Error connecting to Google Sheets. Verify APPS_SCRIPT_URL.</p>';
+      }
+    } else {
+      // Use standard existing mock DOM
+      catalogItems.forEach(card => attachClick(card));
+    }
+  }
+  
+  function attachClick(item) {
+    item.addEventListener('click', () => {
+      const images = item.dataset.img.split(',').map(s => s.trim());
+      selectedProduct = {
+        name: item.dataset.name,
+        price: parseInt(item.dataset.price),
+        tag: item.dataset.tag,
+        desc: item.dataset.desc,
+        img: images[0],
+        allImages: images
+      };
+      
+      document.getElementById('product-title').textContent = selectedProduct.name;
+      document.getElementById('product-desc').textContent = selectedProduct.desc;
+      document.getElementById('product-price').textContent = `KES ${selectedProduct.price.toLocaleString()}`;
+      document.getElementById('product-tag').textContent = selectedProduct.tag;
+      
+      const mainImg = document.getElementById('product-img-main');
+      mainImg.src = selectedProduct.img;
+      
+      // Update Thumbnails
+      const thumbGrid = document.getElementById('product-thumb-grid');
+      thumbGrid.innerHTML = '';
+      if (images.length > 1) {
+        thumbGrid.classList.remove('hidden');
+        images.forEach((url, i) => {
+          const thumb = document.createElement('div');
+          thumb.className = i === 0 ? 'thumb active' : 'thumb';
+          thumb.innerHTML = `<img src="${url}" class="aspect-square" alt="T${i}">`;
+          thumb.addEventListener('click', () => {
+            mainImg.src = url;
+            thumbGrid.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+          });
+          thumbGrid.appendChild(thumb);
+        });
+      } else {
+        thumbGrid.classList.add('hidden');
+      }
+      
+      document.getElementById('summary-title').textContent = selectedProduct.name;
+      document.getElementById('summary-price').textContent = `KES ${selectedProduct.price.toLocaleString()}`;
+      document.getElementById('summary-img').src = selectedProduct.img;
+      document.getElementById('conf-title').textContent = selectedProduct.name;
+      
+      transitionPage(pageCatalog, page1);
+      window.scrollTo(0,0);
+    });
+  }
+
+  loadCatalog();
+  
+  // Page 1: Size Selection
+  sizeSelectorBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sizeSelectorBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      selectedSize = btn.dataset.size;
+      p1NextBtn.disabled = false;
+    });
+  });
+  
+  // Page Transition Helpers
+  function transitionPage(fromPage, toPage) {
+    fromPage.classList.add('fading-out');
+    fromPage.classList.remove('visible');
+    setTimeout(() => {
+      fromPage.classList.remove('active', 'fading-out');
+      toPage.classList.add('active');
+      // Delay so display:block paints before animating opacity
+      setTimeout(() => toPage.classList.add('visible'), 20);
+    }, 300);
+  }
+  
+  // Page 1: Back to catalog
+  btnPage1Back.addEventListener('click', () => {
+    transitionPage(page1, pageCatalog);
+    window.scrollTo(0,0);
+  });
+  
+  // Page 1 -> Page 2
+  p1NextBtn.addEventListener('click', () => {
+    if(!selectedSize) return;
+    inputSize.value = selectedSize;
+    summarySize.textContent = selectedSize;
+    transitionPage(page1, page2);
+    window.scrollTo(0,0);
+  });
+  
+  // Page 2: Back Button
+  btnPage2Back.addEventListener('click', () => {
+    transitionPage(page2, page1);
+    window.scrollTo(0,0);
+  });
+  
+  // Page 2: Delivery Zone Info
+  inputDelivery.addEventListener('change', (e) => {
+    if(e.target.value === 'outside') {
+      outsideInfo.classList.remove('hidden');
+      outsideInfo.classList.add('animate-slide-down');
+    } else {
+      outsideInfo.classList.add('hidden');
+      outsideInfo.classList.remove('animate-slide-down');
+    }
+  });
+  
+  // Page 2 -> Page 3 (Form Submit API)
+  orderForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Halt native action
+    
+    // Validate / Grab inputs natively
+    const formData = new FormData(orderForm);
+    const deliveryZone = formData.get('delivery_zone');
+    let total = selectedProduct.price;
+    let zoneLabel = 'Within Nairobi';
+    if(deliveryZone === 'outside') {
+      zoneLabel = 'Outside Nairobi (Est. 300-350)';
+      total += 350;
+    }
+    
+    const payload = {
+      name: formData.get('name'),
+      phone: formData.get('phone'),
+      location: formData.get('location'),
+      delivery_zone: deliveryZone,
+      product_name: selectedProduct.name,
+      size: selectedSize,
+      total_price: total,
+      notes: formData.get('notes')
+    };
+
+    const submitBtn = document.getElementById('btn-submit');
+    const ogText = submitBtn.textContent;
+    submitBtn.textContent = 'Processing Securely...';
+    submitBtn.disabled = true;
+
+    if (!APPS_SCRIPT_URL) {
+      // Offline fallback
+      setTimeout(() => processSuccess(payload, zoneLabel), 800);
+    } else {
+      // Production Server Submit
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const resData = await response.json();
+        
+        if (resData.status === 'success') {
+          processSuccess(payload, zoneLabel, resData.orderId);
+        } else {
+          alert('API Error: ' + resData.message);
+          submitBtn.textContent = ogText;
+          submitBtn.disabled = false;
+        }
+      } catch(err) {
+        alert('Network integration failed. Check APPS_SCRIPT_URL.');
+        submitBtn.textContent = ogText;
+        submitBtn.disabled = false;
+      }
+    }
+    
+    function processSuccess(data, zoneText, externalRef) {
+      document.getElementById('conf-name').textContent = data.name;
+      document.getElementById('conf-phone').textContent = data.phone;
+      document.getElementById('conf-size').textContent = data.size;
+      document.getElementById('conf-location').textContent = data.location;
+      document.getElementById('conf-delivery').textContent = zoneText;
+      document.getElementById('conf-total').textContent = `KES ${data.total_price.toLocaleString()}`;
+      
+      const newRef = externalRef || 'NBO-' + Math.floor(10000 + Math.random() * 90000);
+      document.getElementById('ref-num').textContent = newRef;
+      
+      transitionPage(page2, page3);
+      window.scrollTo(0,0);
+      
+      setTimeout(() => {
+        document.getElementById('success-icon').classList.add('animate-check');
+      }, 300);
+    }
+  });
+  
+  // Page Form Validation Highlight
+  const inputs = orderForm.querySelectorAll('input[required], select[required]');
+  inputs.forEach(input => {
+    input.addEventListener('invalid', () => {
+      input.classList.add('error');
+    });
+    input.addEventListener('input', () => {
+      if(input.validity.valid) {
+        input.classList.remove('error');
+      }
+    });
+  });
+  
+  // Page 3 -> Reset -> Page Catalog
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    // Reset state
+    orderForm.reset();
+    selectedSize = null;
+    selectedProduct = { name: '', price: 0, tag: '', img: '', desc: '' };
+    sizeSelectorBtns.forEach(b => b.classList.remove('selected'));
+    p1NextBtn.disabled = true;
+    outsideInfo.classList.add('hidden');
+    inputs.forEach(i => i.classList.remove('error'));
+    
+    document.getElementById('success-icon').classList.remove('animate-check');
+    
+    transitionPage(page3, pageCatalog);
+    window.scrollTo(0,0);
+  });
+
+  // initial visible state for animation
+  setTimeout(() => pageCatalog.classList.add('visible'), 50);
+});
+</script>
+</body>
+</html>

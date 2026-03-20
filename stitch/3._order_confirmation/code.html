@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary": "#00363b",
+                        "tertiary-container": "#97f1fa",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#303300",
+                        "outline-variant": "#474834",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "inverse-primary": "#5e6300",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed-dim": "#c7cf28",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#004f55",
+                        "tertiary": "#ffffff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed-dim": "#7ad4dd",
+                        "surface-tint": "#c7cf28",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#006f77",
+                        "surface-dim": "#131313",
+                        "on-primary-fixed-variant": "#474a00",
+                        "outline": "#92927b",
+                        "on-secondary": "#303300",
+                        "on-background": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-container": "#646900",
+                        "primary": "#ffffff",
+                        "surface-variant": "#353534",
+                        "secondary-container": "#474a0f",
+                        "secondary-fixed": "#e4e79c",
+                        "on-surface-variant": "#c9c8ae",
+                        "tertiary-fixed": "#97f1fa",
+                        "secondary-fixed-dim": "#c8cb83",
+                        "background": "#131313",
+                        "primary-fixed": "#e3eb45",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#1c1d00",
+                        "on-secondary-fixed": "#1c1d00",
+                        "surface-container": "#201f1f",
+                        "surface-bright": "#3a3939",
+                        "surface-container-highest": "#353534",
+                        "on-secondary-container": "#b7ba73",
+                        "secondary": "#c8cb83",
+                        "primary-container": "#e3eb45",
+                        "surface": "#131313",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#474a0f",
+                        "on-tertiary-fixed": "#002022"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-6 bg-[#131313] opacity-95 z-50 shadow-[0_40px_40px_rgba(0,0,0,0.06)]">
+<div class="text-2xl font-black tracking-tighter text-[#e3eb45]">SOLE</div>
+<nav class="hidden md:flex gap-8">
+<a class="text-[#e5e2e1] hover:text-[#e3eb45] transition-colors duration-300 font-medium" href="#">Nairobi Kicks</a>
+</nav>
+<div class="flex gap-6">
+<button class="text-[#e5e2e1] hover:text-[#e3eb45] transition-colors duration-300 flex items-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+<button class="text-[#e5e2e1] hover:text-[#e3eb45] transition-colors duration-300 flex items-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</header>
+<main class="pt-32 pb-40 px-6 max-w-4xl mx-auto">
+<!-- Progress Indicator -->
+<div class="flex justify-center items-center mb-16 relative">
+<div class="absolute h-[1px] bg-surface-container-highest w-48 -z-10"></div>
+<div class="flex justify-between w-64 items-center">
+<div class="w-3 h-3 rounded-full bg-surface-container-highest"></div>
+<div class="w-3 h-3 rounded-full bg-surface-container-highest"></div>
+<div class="w-4 h-4 rounded-full bg-primary-fixed ring-4 ring-primary-fixed/20"></div>
+</div>
+</div>
+<!-- Success Message -->
+<div class="text-center mb-20">
+<div class="mb-6 inline-flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-fixed text-8xl md:text-9xl" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-bold tracking-tighter text-on-surface mb-4">Order Placed!</h1>
+<p class="text-on-surface-variant text-lg tracking-tight uppercase font-medium">Order Reference: #NBO-88291</p>
+</div>
+<!-- Bento Grid Layout for Summary and Steps -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Summary Card -->
+<section class="md:col-span-7 bg-surface-container p-8 border-l-4 border-primary-fixed">
+<h2 class="font-headline text-2xl font-bold uppercase tracking-widest mb-8 text-primary-fixed">Order Summary</h2>
+<div class="space-y-6">
+<div class="flex justify-between items-end border-b border-surface-container-highest pb-2">
+<span class="text-on-surface-variant text-sm font-bold uppercase">Customer</span>
+<span class="font-headline text-xl font-bold text-on-surface">Kivuva Mwenda</span>
+</div>
+<div class="flex justify-between items-end border-b border-surface-container-highest pb-2">
+<span class="text-on-surface-variant text-sm font-bold uppercase">Phone</span>
+<span class="font-headline text-xl font-bold text-on-surface">+254 712 345 678</span>
+</div>
+<div class="flex justify-between items-end border-b border-surface-container-highest pb-2">
+<span class="text-on-surface-variant text-sm font-bold uppercase">Product / Size</span>
+<span class="font-headline text-xl font-bold text-on-surface">AF1 Nairobi Edition / 42</span>
+</div>
+<div class="flex justify-between items-end border-b border-surface-container-highest pb-2">
+<span class="text-on-surface-variant text-sm font-bold uppercase">Location</span>
+<span class="font-headline text-xl font-bold text-on-surface">Westlands, Nairobi</span>
+</div>
+<div class="flex justify-between items-end border-b border-surface-container-highest pb-2">
+<span class="text-on-surface-variant text-sm font-bold uppercase">Delivery Zone</span>
+<span class="font-headline text-xl font-bold text-on-surface">Zone A (Priority)</span>
+</div>
+<div class="flex justify-between items-end pt-4">
+<span class="text-primary-fixed text-sm font-black uppercase tracking-widest">Total Amount</span>
+<span class="font-headline text-4xl font-black text-primary-fixed">KES 14,500</span>
+</div>
+</div>
+</section>
+<!-- What Happens Next -->
+<section class="md:col-span-5 flex flex-col gap-6">
+<div class="bg-surface-container-low p-8 h-full">
+<h2 class="font-headline text-2xl font-bold uppercase tracking-widest mb-8">What happens next</h2>
+<ul class="space-y-8">
+<li class="flex gap-4">
+<span class="font-headline text-3xl font-black text-primary-fixed leading-none">01</span>
+<div>
+<p class="text-on-surface font-bold leading-tight">Confirmation Reachout</p>
+<p class="text-on-surface-variant text-sm mt-1">We call or WhatsApp you within 15 minutes to confirm the details.</p>
+</div>
+</li>
+<li class="flex gap-4">
+<span class="font-headline text-3xl font-black text-primary-fixed leading-none">02</span>
+<div>
+<p class="text-on-surface font-bold leading-tight">Logistics Sync</p>
+<p class="text-on-surface-variant text-sm mt-1">We agree on the precise delivery time and the most convenient meeting point.</p>
+</div>
+</li>
+<li class="flex gap-4">
+<span class="font-headline text-3xl font-black text-primary-fixed leading-none">03</span>
+<div>
+<p class="text-on-surface font-bold leading-tight">Secure Payment</p>
+<p class="text-on-surface-variant text-sm mt-1">Inspection first. You pay via Cash or M-Pesa only after receiving your kicks.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</div>
+<!-- Action Button -->
+<div class="mt-16">
+<a class="block w-full bg-primary-fixed text-on-primary-fixed font-headline font-black text-xl py-6 text-center uppercase tracking-[0.2em] transition-all hover:bg-primary-fixed-dim active:scale-[0.98]" href="#">
+                Browse More Shoes
+            </a>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-[#131313] border-t border-[#201f1f]">
+<a class="flex flex-col items-center justify-center text-[#e5e2e1] p-2 hover:bg-[#1c1b1b]" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+<span class="text-[10px] uppercase tracking-widest Inter font-bold">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#e5e2e1] p-2 hover:bg-[#1c1b1b]" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[10px] uppercase tracking-widest Inter font-bold">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#e3eb45] p-2 bg-[#201f1f] opacity-80 scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+<span class="text-[10px] uppercase tracking-widest Inter font-bold">Orders</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#e5e2e1] p-2 hover:bg-[#1c1b1b]" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] uppercase tracking-widest Inter font-bold">Profile</span>
+</a>
+</nav>
+</body></html>
