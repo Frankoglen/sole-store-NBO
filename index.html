@@ -122,6 +122,10 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
 .surface-low { background-color: var(--surface-container-low); padding: 1rem; }
 .aspect-square { aspect-ratio: 1 / 1; object-fit: cover; width: 100%; height: 100%; }
 
+/* Responsive product image container */
+.img-box { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background-color: var(--surface-container); border-bottom: 1px solid var(--surface-container-highest); }
+.img-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+
 /* Grid Layouts */
 .grid > *, .product-grid > *, .form-grid > * { min-width: 0; }
 .product-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
@@ -263,8 +267,8 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
       <div id="catalog-initial-items" style="display: contents;">
         <!-- Product 1 -->
         <div class="surface-card catalog-item flex" style="flex-direction: column; padding: 0; cursor: pointer; transition: transform var(--transition);" data-id="1" data-name="Air Force 1 Premium" data-price="3500" data-tag="New Arrival" data-img="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80" data-desc="Clean, classic, and always in style. Made for the streets of Nairobi. Engineered with premium leather for maximum durability.">
-          <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
-            <img class="catalog-img w-full h-full object-cover" style="transition: transform 0.5s;" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCww_hDxLgx1zR5O15eHgpA4V1hxFtc9TU6MX1764YsiAEkSfVyq096iuFs5WwcmcWUBV13MhibjTqdFq_-1UnioedfMF5bMlE1d2GXZ6Oo2ZerzvTrb4JL3YUQYLF-GhYSr4foHruxWSnx5XZVuL9gbF6_f80UxtTcFcF2JcaYbwCla3HiBbPpLvMk2gJNxPAn--LGi0kKVhkIZBsDyP1qFwu3Y3VMifbI72V5f2zEA6rlkoP_ou6eMRN4kGLetdkIKgqV7_9R9e0" alt="Air Force 1">
+          <div class="img-box">
+            <img class="catalog-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCww_hDxLgx1zR5O15eHgpA4V1hxFtc9TU6MX1764YsiAEkSfVyq096iuFs5WwcmcWUBV13MhibjTqdFq_-1UnioedfMF5bMlE1d2GXZ6Oo2ZerzvTrb4JL3YUQYLF-GhYSr4foHruxWSnx5XZVuL9gbF6_f80UxtTcFcF2JcaYbwCla3HiBbPpLvMk2gJNxPAn--LGi0kKVhkIZBsDyP1qFwu3Y3VMifbI72V5f2zEA6rlkoP_ou6eMRN4kGLetdkIKgqV7_9R9e0" alt="Air Force 1">
           </div>
           <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
@@ -277,8 +281,8 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
         
         <!-- Product 2 -->
         <div class="surface-card catalog-item flex" style="flex-direction: column; padding: 0; cursor: pointer; transition: transform var(--transition);" data-id="2" data-name="Air Jordan 4 Retro" data-price="4500" data-tag="Bestseller" data-img="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&q=80" data-desc="Iconic silhouette with premium mixed materials. Maximum comfort and street credibility.">
-          <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
-            <img class="catalog-img w-full h-full object-cover" style="transition: transform 0.5s;" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&q=80" alt="AJ4">
+          <div class="img-box">
+            <img class="catalog-img" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=800&q=80" alt="AJ4">
           </div>
           <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
@@ -357,7 +361,7 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
         </div>
         <div class="surface-low flex" style="align-items: center; gap: 0.75rem;">
           <span class="material-symbols-outlined text-primary">local_shipping</span>
-          <span class="text-sm font-bold">Free Delivery Nairobi</span>
+          <span class="text-sm font-bold">Delivery Available</span>
         </div>
       </div>
 
@@ -369,7 +373,7 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
         </div>
         <div class="flex" style="justify-content: space-between; border-bottom: 1px solid var(--surface-container-highest); padding-bottom: 1rem; margin-bottom: 1rem;">
           <span class="text-variant">Delivery (Nairobi)</span>
-          <span class="font-bold text-primary">Free</span>
+          <span class="font-bold text-primary">Paid on Delivery</span>
         </div>
         <div class="flex" style="justify-content: space-between; border-bottom: 1px solid var(--surface-container-highest); padding-bottom: 1rem; margin-bottom: 1rem;">
           <span class="text-variant">Delivery (Outside)</span>
@@ -433,14 +437,14 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
             <label class="form-label">Delivery Zone</label>
             <select class="form-input form-select" id="input-delivery" name="delivery_zone" required>
               <option value="" disabled selected hidden>Select Delivery Zone</option>
-              <option value="nairobi">Within Nairobi - Free</option>
-              <option value="outside">Outside Nairobi - KES 300-350</option>
+              <option value="nairobi">Within Nairobi — Pay on Delivery</option>
+              <option value="outside">Outside Nairobi — Pay Before Dispatch (KES 300–350)</option>
             </select>
           </div>
           
           <div id="outside-nairobi-info" class="surface-low hidden flex form-group-full" style="background-color: var(--surface-container-low); gap: 1rem; align-items: flex-start; border-left: 2px solid var(--primary-fixed); padding: 1.25rem;">
             <span class="material-symbols-outlined text-primary">info</span>
-            <p class="text-sm text-variant" style="line-height: 1.6;">Mpesa payment collected before dispatch via PSV courier.</p>
+            <p class="text-sm text-variant" style="line-height: 1.6;">Payment is required <strong>before dispatch</strong> via M-Pesa for orders outside Nairobi. We will send you a paybill/till number after confirming your order.</p>
           </div>
           
           <div class="form-group form-group-full">
@@ -453,7 +457,7 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
           <button id="btn-submit" type="submit" class="btn-primary" style="margin-bottom: 1rem;">Confirm Order</button>
           <div class="flex" style="align-items: center; justify-content: center; gap: 0.5rem; color: var(--on-surface-variant);">
             <span class="material-symbols-outlined text-sm">verified_user</span>
-            <p class="text-xs uppercase tracking-widest font-bold">No payment on this page. You pay when we arrive.</p>
+            <p class="text-xs uppercase tracking-widest font-bold">No payment on this page. We confirm your order by phone.</p>
           </div>
         </div>
       </form>
@@ -552,8 +556,8 @@ main { padding-top: 7rem; padding-bottom: 8rem; }
           <li class="flex" style="gap: 1rem;">
             <span class="font-headline text-3xl font-black text-primary" style="line-height: 1;">03</span>
             <div>
-              <p class="font-bold" style="margin-bottom: 0.25rem;">Secure Payment</p>
-              <p class="text-variant text-sm">Inspection first. You pay via Cash or M-Pesa only after receiving your kicks.</p>
+              <p class="font-bold" style="margin-bottom: 0.25rem;">Payment</p>
+              <p class="text-variant text-sm"><strong>Nairobi:</strong> Inspect first, then pay via Cash or M-Pesa on delivery. <strong>Outside Nairobi:</strong> Pay via M-Pesa before we dispatch your order.</p>
             </div>
           </li>
         </ul>
@@ -675,8 +679,8 @@ document.addEventListener('DOMContentLoaded', () => {
             card.dataset.desc = product.Description;
             
             card.innerHTML = `
-              <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
-                <img class="catalog-img w-full h-full object-cover" style="transition: transform 0.5s;" src="${product.Image}" alt="${product.Name}">
+              <div class="img-box">
+                <img class="catalog-img" src="${product.Image}" alt="${product.Name}">
               </div>
               <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
@@ -706,8 +710,8 @@ document.addEventListener('DOMContentLoaded', () => {
               card.dataset.desc = product.Description;
 
               card.innerHTML = `
-                <div class="aspect-square" style="overflow: hidden; border-bottom: 1px solid var(--surface-container-highest);">
-                  <img class="w-full h-full object-cover" src="${product.Image.split(',')[0].trim()}" alt="${product.Name}">
+                <div class="img-box">
+                  <img class="catalog-img" src="${product.Image.split(',')[0].trim()}" alt="${product.Name}">
                 </div>
                 <div style="padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
                   <div>
